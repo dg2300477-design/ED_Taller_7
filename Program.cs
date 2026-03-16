@@ -2,6 +2,7 @@ namespace ED_Taller_7
 {
     internal static class Program
     {
+        //Hola mundo
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
