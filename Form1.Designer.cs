@@ -42,6 +42,7 @@
             // 
             // btnIniciar
             // 
+            btnIniciar.Font = new Font("Segoe UI Black", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnIniciar.Location = new Point(330, 145);
             btnIniciar.Margin = new Padding(4, 3, 4, 3);
             btnIniciar.Name = "btnIniciar";
@@ -53,6 +54,7 @@
             // 
             // btnReiniciar
             // 
+            btnReiniciar.Font = new Font("Segoe UI Black", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnReiniciar.Location = new Point(425, 145);
             btnReiniciar.Margin = new Padding(4, 3, 4, 3);
             btnReiniciar.Name = "btnReiniciar";
@@ -64,6 +66,7 @@
             // 
             // listBoxTorreA
             // 
+            listBoxTorreA.BackColor = SystemColors.ActiveCaption;
             listBoxTorreA.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             listBoxTorreA.FormattingEnabled = true;
             listBoxTorreA.Location = new Point(120, 210);
@@ -74,6 +77,7 @@
             // 
             // listBoxTorreB
             // 
+            listBoxTorreB.BackColor = Color.Pink;
             listBoxTorreB.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             listBoxTorreB.FormattingEnabled = true;
             listBoxTorreB.Location = new Point(307, 210);
@@ -84,6 +88,7 @@
             // 
             // listBoxTorreC
             // 
+            listBoxTorreC.BackColor = Color.PapayaWhip;
             listBoxTorreC.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             listBoxTorreC.FormattingEnabled = true;
             listBoxTorreC.Location = new Point(493, 210);
@@ -115,6 +120,8 @@
             // 
             // btnSeleccionarA
             // 
+            btnSeleccionarA.BackColor = SystemColors.ActiveCaption;
+            btnSeleccionarA.Font = new Font("Segoe UI Black", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnSeleccionarA.Location = new Point(120, 447);
             btnSeleccionarA.Margin = new Padding(4, 3, 4, 3);
             btnSeleccionarA.Name = "btnSeleccionarA";
@@ -122,11 +129,13 @@
             btnSeleccionarA.TabIndex = 8;
             btnSeleccionarA.Tag = "0";
             btnSeleccionarA.Text = "Seleccionar A";
-            btnSeleccionarA.UseVisualStyleBackColor = true;
+            btnSeleccionarA.UseVisualStyleBackColor = false;
             btnSeleccionarA.Click += btnSeleccionarTorre_Click;
             // 
             // btnSeleccionarB
             // 
+            btnSeleccionarB.BackColor = Color.Pink;
+            btnSeleccionarB.Font = new Font("Segoe UI Black", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnSeleccionarB.Location = new Point(307, 447);
             btnSeleccionarB.Margin = new Padding(4, 3, 4, 3);
             btnSeleccionarB.Name = "btnSeleccionarB";
@@ -134,11 +143,13 @@
             btnSeleccionarB.TabIndex = 9;
             btnSeleccionarB.Tag = "1";
             btnSeleccionarB.Text = "Seleccionar B";
-            btnSeleccionarB.UseVisualStyleBackColor = true;
+            btnSeleccionarB.UseVisualStyleBackColor = false;
             btnSeleccionarB.Click += btnSeleccionarTorre_Click;
             // 
             // btnSeleccionarC
             // 
+            btnSeleccionarC.BackColor = Color.PapayaWhip;
+            btnSeleccionarC.Font = new Font("Segoe UI Black", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnSeleccionarC.Location = new Point(493, 447);
             btnSeleccionarC.Margin = new Padding(4, 3, 4, 3);
             btnSeleccionarC.Name = "btnSeleccionarC";
@@ -146,7 +157,7 @@
             btnSeleccionarC.TabIndex = 10;
             btnSeleccionarC.Tag = "2";
             btnSeleccionarC.Text = "Seleccionar C";
-            btnSeleccionarC.UseVisualStyleBackColor = true;
+            btnSeleccionarC.UseVisualStyleBackColor = false;
             btnSeleccionarC.Click += btnSeleccionarTorre_Click;
             // 
             // label1
@@ -162,12 +173,12 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Vladimir Script", 30F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.Font = new Font("Palatino Linotype", 30F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.Location = new Point(174, 53);
             label2.Name = "label2";
-            label2.Size = new Size(320, 48);
+            label2.Size = new Size(401, 55);
             label2.TabIndex = 12;
-            label2.Text = "Las Torres de Hano ";
+            label2.Text = "Las Torres de Hanoi ";
             label2.Click += label2_Click;
             // 
             // Form1
