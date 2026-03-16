@@ -12,9 +12,13 @@ namespace ED_Taller_7
         private StackArray<int> TorreB = new StackArray<int>();
         private StackArray<int> TorreC = new StackArray<int>();
 
+        private StackArray<int> Salida;
+        private StackArray<int> Entrada;
+
         private int movimientos = 0;
         private int totalDiscos = 0;
         private int origenSeleccionado = -1; // -1: ninguno seleccionado
+
 
         public Form1()
         {
@@ -151,6 +155,11 @@ namespace ED_Taller_7
         {
             ReiniciarTodo();
             ActualizarPantalla();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
