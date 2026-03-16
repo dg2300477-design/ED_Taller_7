@@ -1,133 +1,156 @@
 using System;
+using System.Drawing;
 using System.Windows.Forms;
-using ED_Taller_7;
+using EST_Master.Structures.Stacks; // Asegúrate de que este sea tu namespace
 
 namespace ED_Taller_7
 {
     public partial class Form1 : Form
     {
-        // Pilas personalizadas
-        private ArrayStack<int> TorreA;
-        private ArrayStack<int> TorreB;
-        private ArrayStack<int> TorreC;
+        // 1. Pilas obligatorias del taller
+        private StackArray<int> TorreA = new StackArray<int>();
+        private StackArray<int> TorreB = new StackArray<int>();
+        private StackArray<int> TorreC = new StackArray<int>();
 
         private int movimientos = 0;
         private int totalDiscos = 0;
-        private int torreOrigenSeleccionada = -1;
+        private int origenSeleccionado = -1; // -1: ninguno seleccionado
 
         public Form1()
         {
             InitializeComponent();
-            // Inicialización de pilas
-            TorreA = new ArrayStack<int>();
-            TorreB = new ArrayStack<int>();
-            TorreC = new ArrayStack<int>();
         }
 
-        private void btnIniciar_Click(object sender, EventArgs e)
+        // --- ESTOS MÉTODOS ARREGLAN LOS ERRORES DEL DESIGNER (CS0103) ---
+
+        // Si el error dice 'txtNumeroDiscos_TextChanged' no existe:
+        private void txtNumeroDiscos_TextChanged(object sender, EventArgs e)
         {
-            if (!int.TryParse(txtNumeroDiscos.Text, out totalDiscos) || totalDiscos <= 0)
-            {
-                MessageBox.Show("Ingrese un número válido.");
-                return;
-            }
-
-            ReiniciarJuego();
-
-            for (int i = totalDiscos; i >= 1; i--)
-            {
-                TorreA.Push(i);
-            }
-
-            lblMovimientosMinimos.Text = "Mínimos: " + (Math.Pow(2, totalDiscos) - 1);
-            ActualizarInterfaz();
+            // Se deja vacío para que el Designer no falle
         }
 
+        // Si el error dice 'btnSeleccionarTorre_Click' no existe:
         private void btnSeleccionarTorre_Click(object sender, EventArgs e)
         {
             if (totalDiscos == 0) return;
 
             Button btn = (Button)sender;
-            int torreClickeada = int.Parse(btn.Tag.ToString());
+            // Importante: El Tag del botón debe ser 0, 1 o 2
+            int torreID = int.Parse(btn.Tag.ToString());
 
-            if (torreOrigenSeleccionada == -1)
+            if (origenSeleccionado == -1)
             {
-                if (!ObtenerPila(torreClickeada).IsEmpty())
-                    torreOrigenSeleccionada = torreClickeada;
+                if (!ObtenerTorre(torreID).IsEmpty())
+                {
+                    origenSeleccionado = torreID;
+                    Resaltar(torreID, true);
+                }
             }
             else
             {
-                MoverDisco(torreOrigenSeleccionada, torreClickeada);
-                torreOrigenSeleccionada = -1;
-                ActualizarInterfaz();
+                MoverDisco(origenSeleccionado, torreID);
+                Resaltar(origenSeleccionado, false);
+                origenSeleccionado = -1;
+                ActualizarPantalla();
                 VerificarVictoria();
             }
         }
 
-        private void MoverDisco(int origen, int destino)
+        // --- LÓGICA DE JUEGO ---
+
+        private void btnIniciar_Click(object sender, EventArgs e)
         {
-            if (origen == destino) return;
-
-            ArrayStack<int> pOrigen = ObtenerPila(origen);
-            ArrayStack<int> pDestino = ObtenerPila(destino);
-
-            if (pDestino.IsEmpty() || pOrigen.Peek() < pDestino.Peek())
+            if (!int.TryParse(txtNumeroDiscos.Text, out totalDiscos) || totalDiscos <= 0)
             {
-                pDestino.Push(pOrigen.Pop());
+                MessageBox.Show("Ingrese un número de discos válido.");
+                return;
+            }
+
+            ReiniciarTodo();
+            for (int i = totalDiscos; i >= 1; i--) TorreA.Push(i);
+
+            lblMovimientosMinimos.Text = "Mínimos: " + (Math.Pow(2, totalDiscos) - 1);
+            ActualizarPantalla();
+        }
+
+        private void MoverDisco(int de, int a)
+        {
+            if (de == a) return;
+            var stackOrigen = ObtenerTorre(de);
+            var stackDestino = ObtenerTorre(a);
+
+            // Validación con PEEK (Punto 3 del taller)
+            if (stackDestino.IsEmpty() || stackOrigen.Peek() < stackDestino.Peek())
+            {
+                stackDestino.Push(stackOrigen.Pop());
                 movimientos++;
                 lblMovimientos.Text = "Movimientos: " + movimientos;
             }
             else
             {
-                MessageBox.Show("Movimiento inválido.");
+                MessageBox.Show("Movimiento inválido: Disco grande sobre pequeño.");
             }
         }
 
-        private void ActualizarInterfaz()
+        // --- DIBUJO CON COLORES (SIN EMOJIS) ---
+
+        private void ActualizarPantalla()
         {
-            RefrescarListBox(TorreA, listBoxTorreA);
-            RefrescarListBox(TorreB, listBoxTorreB);
-            RefrescarListBox(TorreC, listBoxTorreC);
+            DibujarTorre(TorreA, listBoxTorreA);
+            DibujarTorre(TorreB, listBoxTorreB);
+            DibujarTorre(TorreC, listBoxTorreC);
         }
 
-        private void RefrescarListBox(ArrayStack<int> pila, ListBox lb)
+        private void DibujarTorre(StackArray<int> torre, ListBox lb)
         {
             lb.Items.Clear();
-            ArrayStack<int> aux = new ArrayStack<int>();
-            while (!pila.IsEmpty())
+            StackArray<int> aux = new StackArray<int>();
+
+            while (!torre.IsEmpty()) aux.Push(torre.Pop());
+
+            while (!aux.IsEmpty())
             {
-                int d = pila.Pop();
-                lb.Items.Add("Disco " + d);
-                aux.Push(d);
+                int disco = aux.Pop();
+                // Representación visual con caracteres: [======= 3 =======]
+                string barra = new string('=', disco * 2);
+                lb.Items.Add(string.Format("{0,15}", "[" + barra + " " + disco + " " + barra + "]"));
+                torre.Push(disco);
             }
-            while (!aux.IsEmpty()) pila.Push(aux.Pop());
         }
 
-        private ArrayStack<int> ObtenerPila(int i)
-        {
-            if (i == 0) return TorreA;
-            if (i == 1) return TorreB;
-            return TorreC;
-        }
+        // --- UTILIDADES ---
 
         private void VerificarVictoria()
         {
             if (TorreC.Count() == totalDiscos && totalDiscos > 0)
-                MessageBox.Show("¡Ganaste!");
+                MessageBox.Show("¡GANASTE! Todos los discos están en la Torre C.");
         }
 
-        private void btnReiniciar_Click(object sender, EventArgs e)
+        private StackArray<int> ObtenerTorre(int id) => id == 0 ? TorreA : (id == 1 ? TorreB : TorreC);
+
+        private void Resaltar(int id, bool r)
         {
-            ReiniciarJuego();
+            Color c = r ? Color.LightBlue : Color.White;
+            if (id == 0) listBoxTorreA.BackColor = c;
+            else if (id == 1) listBoxTorreB.BackColor = c;
+            else listBoxTorreC.BackColor = c;
         }
 
-        private void ReiniciarJuego()
+        private void ReiniciarTodo()
         {
             TorreA.Clear(); TorreB.Clear(); TorreC.Clear();
             movimientos = 0;
             lblMovimientos.Text = "Movimientos: 0";
-            torreOrigenSeleccionada = -1;
-            ActualizarInterfaz();
+            origenSeleccionado = -1;
+            listBoxTorreA.BackColor = Color.White;
+            listBoxTorreB.BackColor = Color.White;
+            listBoxTorreC.BackColor = Color.White;
+        }
+
+        private void btnReiniciar_Click(object sender, EventArgs e)
+        {
+            ReiniciarTodo();
+            ActualizarPantalla();
         }
     }
 }

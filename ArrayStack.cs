@@ -1,14 +1,15 @@
 ﻿using System;
+using EST_Master.Interfaces;
 
-namespace ED_Taller_7
+namespace EST_Master.Structures.Stacks
 {
-    public class ArrayStack<T> : IPila<T>
+    public class StackArray<T> : IStack<T>
     {
         private T[] array;
         private int size;
         private int capacity;
 
-        public ArrayStack(int initialCapacity = 4)
+        public StackArray(int initialCapacity = 10)
         {
             capacity = initialCapacity;
             array = new T[capacity];
@@ -17,40 +18,27 @@ namespace ED_Taller_7
 
         public void Push(T data)
         {
-            if (size == capacity)
-            {
-                capacity *= 2;
-                T[] newArray = new T[capacity];
-                Array.Copy(array, newArray, size);
-                array = newArray;
-            }
-            array[size] = data;
-            size++;
+            if (size == capacity) Resize();
+            array[size++] = data;
         }
 
         public T Pop()
         {
-            if (IsEmpty()) throw new InvalidOperationException("La pila está vacía.");
-            size--;
-            T data = array[size];
-            array[size] = default(T);
-            return data;
+            if (IsEmpty()) throw new InvalidOperationException("Pila vacía");
+            return array[--size];
         }
 
-        public T Peek()
-        {
-            if (IsEmpty()) throw new InvalidOperationException("La pila está vacía.");
-            return array[size - 1];
-        }
-
+        public T Peek() => IsEmpty() ? default(T) : array[size - 1];
         public bool IsEmpty() => size == 0;
-
         public int Count() => size;
+        public void Clear() => size = 0;
 
-        public void Clear()
+        private void Resize()
         {
-            array = new T[capacity];
-            size = 0;
+            capacity *= 2;
+            T[] newArray = new T[capacity];
+            Array.Copy(array, newArray, size);
+            array = newArray;
         }
     }
 }
