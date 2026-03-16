@@ -151,5 +151,10 @@ namespace ED_Taller_7
         {
 
         }
+
+        private void listBoxTorreC_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
