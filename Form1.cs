@@ -11,9 +11,13 @@ namespace ED_Taller_7
         private ArrayStack<int> TorreB;
         private ArrayStack<int> TorreC;
 
+        private ArrayStack<int> Salida;
+        private ArrayStack<int> Entrada;
+
         private int movimientos = 0;
         private int totalDiscos = 0;
         private int torreOrigenSeleccionada = -1;
+
 
         public Form1()
         {
@@ -128,6 +132,11 @@ namespace ED_Taller_7
             lblMovimientos.Text = "Movimientos: 0";
             torreOrigenSeleccionada = -1;
             ActualizarInterfaz();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
