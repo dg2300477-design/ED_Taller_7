@@ -1,7 +1,7 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using EST_Master.Structures.Stacks; // Asegúrate de que este sea tu namespace
+using ED_Taller_7;
 
 namespace ED_Taller_7
 {
@@ -23,15 +23,10 @@ namespace ED_Taller_7
             InitializeComponent();
         }
 
-        // --- ESTOS MÉTODOS ARREGLAN LOS ERRORES DEL DESIGNER (CS0103) ---
-
-        // Si el error dice 'txtNumeroDiscos_TextChanged' no existe:
         private void txtNumeroDiscos_TextChanged(object sender, EventArgs e)
         {
             // Se deja vacío para que el Designer no falle
         }
-
-        // Si el error dice 'btnSeleccionarTorre_Click' no existe:
         private void btnSeleccionarTorre_Click(object sender, EventArgs e)
         {
             if (totalDiscos == 0) return;
@@ -93,9 +88,6 @@ namespace ED_Taller_7
                 MessageBox.Show("Movimiento inválido: Disco grande sobre pequeño.");
             }
         }
-
-        // --- DIBUJO CON COLORES (SIN EMOJIS) ---
-
         private void ActualizarPantalla()
         {
             DibujarTorre(TorreA, listBoxTorreA);
