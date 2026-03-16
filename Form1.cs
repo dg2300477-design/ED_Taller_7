@@ -12,8 +12,6 @@ namespace ED_Taller_7
         private StackArray<int> TorreB = new StackArray<int>();
         private StackArray<int> TorreC = new StackArray<int>();
 
-        private StackArray<int> Salida;
-        private StackArray<int> Entrada;
 
         private int movimientos = 0;
         private int totalDiscos = 0;
