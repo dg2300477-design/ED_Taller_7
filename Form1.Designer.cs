@@ -37,13 +37,13 @@
             txtNumeroDiscos.Location = new Point(243, 147);
             txtNumeroDiscos.Margin = new Padding(4, 3, 4, 3);
             txtNumeroDiscos.Name = "txtNumeroDiscos";
-            txtNumeroDiscos.Size = new Size(69, 23);
+            txtNumeroDiscos.Size = new Size(129, 23);
             txtNumeroDiscos.TabIndex = 0;
             // 
             // btnIniciar
             // 
             btnIniciar.Font = new Font("Segoe UI Black", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnIniciar.Location = new Point(330, 145);
+            btnIniciar.Location = new Point(392, 144);
             btnIniciar.Margin = new Padding(4, 3, 4, 3);
             btnIniciar.Name = "btnIniciar";
             btnIniciar.Size = new Size(88, 27);
@@ -55,7 +55,7 @@
             // btnReiniciar
             // 
             btnReiniciar.Font = new Font("Segoe UI Black", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnReiniciar.Location = new Point(425, 145);
+            btnReiniciar.Location = new Point(487, 144);
             btnReiniciar.Margin = new Padding(4, 3, 4, 3);
             btnReiniciar.Name = "btnReiniciar";
             btnReiniciar.Size = new Size(88, 27);
@@ -169,6 +169,7 @@
             label1.Size = new Size(107, 15);
             label1.TabIndex = 11;
             label1.Text = "Número de Discos:";
+            label1.Click += label1_Click;
             // 
             // label2
             // 
@@ -185,6 +186,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.Silver;
             ClientSize = new Size(780, 565);
             Controls.Add(label2);
             Controls.Add(label1);
