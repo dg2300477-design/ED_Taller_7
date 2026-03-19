@@ -1,62 +1,75 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-
+﻿
 namespace ED_Taller_7
 {
     public class StackArray<T> : IStack<T>
     {
-        private T[] array;
-        private int size;
-        private int capacity;
+        private T[] elementos;
+        private int tope;
+        private const int CapacidadInicial = 10;
 
-        public StackArray(int Capacity = 4)//Constructor
+        // Constructor
+        public StackArray()
         {
-            capacity = Capacity;
-            array = new T[capacity];
-            size = 0;
+            elementos = new T[CapacidadInicial];
+            tope = -1; // -1 indica que la pila está vacía
         }
 
-        public void Push(T data)
+        // Inserta un elemento en la parte superior de la pila
+        public void Push(T item)
         {
-            if (size == capacity)
+            // Si el arreglo está lleno, duplicamos su tamaño
+            if (tope == elementos.Length - 1)
             {
-                //I Duplica la capacidad, lo hace mas grande y copia los elementos
-                capacity *= 2; 
-                T[] newArray = new T[capacity]; 
-                Array.Copy(array, newArray, size);
-                array = newArray;
+                Array.Resize(ref elementos, elementos.Length * 2);
             }
-            array[size] = data;
-            size++;
+
+            tope++;
+            elementos[tope] = item;
         }
 
+        // Retira y devuelve el elemento superior de la pila
         public T Pop()
         {
-            //E reduce el tamaño , guarda el valor, Borra la referencia  -Nulling out references
-            if (IsEmpty()) throw new InvalidOperationException("La pila está vacía.");
-            size--;
-            T data = array[size];
-            array[size] = default(T);
-            return data; //Devuelve el elemento
+            if (IsEmpty())
+            {
+                throw new InvalidOperationException("La pila está vacía.");
+            }
+
+            T item = elementos[tope];
+            elementos[tope] = default(T); // Limpiamos la referencia
+            tope--;
+
+            return item;
         }
 
+        // Devuelve el elemento superior sin retirarlo (Necesario para validar movimientos)
         public T Peek()
         {
-            if (IsEmpty()) throw new InvalidOperationException("La pila está vacía.");
-            return array[size - 1]; //Accede al ultimo elemento ingresado
+            if (IsEmpty())
+            {
+                throw new InvalidOperationException("La pila está vacía.");
+            }
+
+            return elementos[tope];
         }
 
-        public bool IsEmpty() => size == 0;//Condicional si no hay elementos
+        // Verifica si la pila está vacía
+        public bool IsEmpty()
+        {
+            return tope == -1;
+        }
 
-        public int Count() => size; //Devuelve el numero actual elementos
+        // Devuelve la cantidad actual de elementos en la pila
+        public int Count()
+        {
+            return tope + 1;
+        }
 
+        // Vacía la pila completamente
         public void Clear()
         {
-            //Se crea un nuevo arreglo y se reinicia la pila
-            array = new T[capacity];
-            size = 0;
-        }   
+            elementos = new T[CapacidadInicial];
+            tope = -1;
+        }
     }
 }
