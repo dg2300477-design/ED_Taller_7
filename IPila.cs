@@ -1,6 +1,6 @@
 ﻿namespace EST_Master.Interfaces
 {
-    public interface IStack<T>
+    public interface IPila<T>
     {
         void Push(T data);    
         T Pop();             

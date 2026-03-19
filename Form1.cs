@@ -29,27 +29,27 @@ namespace ED_Taller_7
         }
         private void btnSeleccionarTorre_Click(object sender, EventArgs e)
         {
-            if (totalDiscos == 0) return;
+            if (totalDiscos == 0) return; //si no hay discos de una torre a otra no  hace nada
 
-            Button btn = (Button)sender;
+            Button btn = (Button)sender; //el sender sera el boton
             // Importante: El Tag del botón debe ser 0, 1 o 2
-            int torreID = int.Parse(btn.Tag.ToString());
+            int torreID = int.Parse(btn.Tag.ToString()); //identifica el boton de la torre seleccionada
 
-            if (origenSeleccionado == -1)
+            if (origenSeleccionado == -1) //si aun no hay torre de origen seleccionada
             {
-                if (!ObtenerTorre(torreID).IsEmpty())
+                if (!ObtenerTorre(torreID).IsEmpty()) //si la torre seleccionada NO está vacia
                 {
-                    origenSeleccionado = torreID;
-                    Resaltar(torreID, true);
+                    origenSeleccionado = torreID; //la torre sera de donde saldra el disco
+                    Resaltar(torreID, true);    //y sera resaltada para indicar que fue seleccionada
                 }
             }
-            else
+            else  //en cambio si ya hay torre de origen seleccionada
             {
-                MoverDisco(origenSeleccionado, torreID);
-                Resaltar(origenSeleccionado, false);
-                origenSeleccionado = -1;
-                ActualizarPantalla();
-                VerificarVictoria();
+                MoverDisco(origenSeleccionado, torreID); //llamará al metodo de mover disco
+                Resaltar(origenSeleccionado, false); //metodo de resaltar
+                origenSeleccionado = -1; //reinicia la seleccion
+                ActualizarPantalla(); //redibujara las torres de la interfaz
+                VerificarVictoria(); //evalua si el jugador ganó(si los discos estan ordenados en c)
             }
         }
 
