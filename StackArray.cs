@@ -11,7 +11,7 @@ namespace ED_Taller_7
         private int size;
         private int capacity;
 
-        public StackArray(int Capacity = 4)
+        public StackArray(int Capacity = 4)//Constructor
         {
             capacity = Capacity;
             array = new T[capacity];
@@ -22,8 +22,9 @@ namespace ED_Taller_7
         {
             if (size == capacity)
             {
-                capacity *= 2;
-                T[] newArray = new T[capacity];
+                //I Duplica la capacidad, lo hace mas grande y copia los elementos
+                capacity *= 2; 
+                T[] newArray = new T[capacity]; 
                 Array.Copy(array, newArray, size);
                 array = newArray;
             }
@@ -33,6 +34,7 @@ namespace ED_Taller_7
 
         public T Pop()
         {
+            //E reduce el tamaño , guarda el valor, libera el objeto -Nulling out references
             if (IsEmpty()) throw new InvalidOperationException("La pila está vacía.");
             size--;
             T data = array[size];
