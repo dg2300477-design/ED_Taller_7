@@ -72,24 +72,27 @@ namespace ED_Taller_7
 
         private void MoverDisco(int de, int a)
         {
-            if (de == a) return;
-            var stackOrigen = ObtenerTorre(de);
+            if (de == a) return; //evita movimiento hacia la misma torre
+            var stackOrigen = ObtenerTorre(de); //maneja cada torre como stack
             var stackDestino = ObtenerTorre(a);
 
             // Validación con PEEK (Punto 3 del taller)
+            //si el disco de destino está vacio o el disco del origen es mas pequeño al de destino
             if (stackDestino.IsEmpty() || stackOrigen.Peek() < stackDestino.Peek())
             {
-                stackDestino.Push(stackOrigen.Pop());
-                movimientos++;
-                lblMovimientos.Text = "Movimientos: " + movimientos;
+                stackDestino.Push(stackOrigen.Pop());//saca el disco de origen y lo pone inmediatamente en destino
+                movimientos++;//aumenta el numero de movimientos realizados
+                lblMovimientos.Text = "Movimientos: " + movimientos; //marca el contador de movimientos
             }
             else
             {
+                //si no se cumple la regla lanza un mensaje de error
                 MessageBox.Show("Movimiento inválido: Disco grande sobre pequeño.");
             }
         }
         private void ActualizarPantalla()
         {
+            //redibuja cada torre en su listbox correspondiente
             DibujarTorre(TorreA, listBoxTorreA);
             DibujarTorre(TorreB, listBoxTorreB);
             DibujarTorre(TorreC, listBoxTorreC);
@@ -97,7 +100,8 @@ namespace ED_Taller_7
 
         private void DibujarTorre(StackArray<int> torre, ListBox lb)
         {
-            lb.Items.Clear();
+            lb.Items.Clear();//borra todo lo que estaba para redibujar desde cero
+
             StackArray<int> aux = new StackArray<int>();
 
             while (!torre.IsEmpty()) aux.Push(torre.Pop());
