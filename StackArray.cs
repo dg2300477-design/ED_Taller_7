@@ -48,7 +48,7 @@ namespace ED_Taller_7
             return array[size - 1]; //Accede al ultimo elemento ingresado
         }
 
-        public bool IsEmpty() => size == 0;//condicional si no hay elementos
+        public bool IsEmpty() => size == 0;//Condicional si no hay elementos
 
         public int Count() => size; //Devuelve el numero actual elementos
 
@@ -57,6 +57,6 @@ namespace ED_Taller_7
             //Se crea un nuevo arreglo y se reinicia la pila
             array = new T[capacity];
             size = 0;
-        }
+        }   
     }
 }
