@@ -8,6 +8,7 @@ namespace ED_Taller_7
         private const int CapacidadInicial = 10;
 
         // Constructor
+        //Holaputos
         public StackArray()
         {
             elementos = new T[CapacidadInicial];
