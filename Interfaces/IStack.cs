@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ED_Taller_7
+namespace ED_Taller_7.ED_Taller_7.Interfaces
 {
     internal interface IStack<T>
     {

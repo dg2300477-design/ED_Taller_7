@@ -6,5 +6,9 @@ namespace ED_Taller_7.ED_Taller_7.Tree
 {
     internal class TreeAVL
     {
+
+
+        private Node Rotate Left(){
+
     }
 }

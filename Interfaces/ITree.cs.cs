@@ -1,9 +1,9 @@
 ﻿using System;
-using ED_Taller_7.Nodes; 
 
-namespace ED_Taller_7.Interfaces
+
+namespace ED_Taller_7.ED_Taller_7.Interfaces
 {
-    public interface ITree<T> where T : IComparable<T>
+    public interface ITree<T>
     {
         void Insert(T data);
         T Remove(T data);

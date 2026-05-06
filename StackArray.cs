@@ -1,4 +1,6 @@
 ﻿
+using ED_Taller_7.ED_Taller_7.Interfaces;
+
 namespace ED_Taller_7
 {
     public class StackArray<T> : IStack<T>
