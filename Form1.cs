@@ -165,9 +165,9 @@ namespace ED_Taller_7
             g.DrawString(nodo.Data.ToString(), new Font("Arial", 10, FontStyle.Bold), Brushes.White, x, y, sf);
         }
 
-        // ==========================================
-        // 4. LÓGICA DE HANOI (Tu código original intacto)
-        // ==========================================
+        // ==================
+        // 4. LÓGICA DE HANOI 
+        // ==================
         private void btnIniciar_Click(object sender, EventArgs e)
         {
             if (!int.TryParse(txtNumeroDiscos.Text, out totalDiscos) || totalDiscos <= 0 || totalDiscos > 15)
